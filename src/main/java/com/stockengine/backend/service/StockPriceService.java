@@ -12,7 +12,11 @@ public class StockPriceService {
     @Value("${alphavantage.api.key}")
     private String apiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+
+    public StockPriceService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public double getLivePrice(String symbol) {
 
