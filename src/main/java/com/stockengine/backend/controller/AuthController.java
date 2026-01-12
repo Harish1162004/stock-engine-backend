@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"https://stock-engine-frontend-1.vercel.app", "https://stock-engine-frontend-1-vvn3.vercel.app"})
 public class AuthController {
 
     @Autowired
@@ -22,6 +21,12 @@ public class AuthController {
     // 🔐 SIGNUP
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody User user) {
+
+        if (user.getUsername() == null || user.getPassword() == null) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Username and password are required");
+        }
 
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             return ResponseEntity
@@ -38,6 +43,12 @@ public class AuthController {
     // 🔑 LOGIN
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User loginUser) {
+
+        if (loginUser.getUsername() == null || loginUser.getPassword() == null) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Username and password are required");
+        }
 
         User user = userRepository.findByUsername(loginUser.getUsername())
                 .orElse(null);
