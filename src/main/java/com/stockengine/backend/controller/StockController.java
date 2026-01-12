@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/stock")
-@CrossOrigin(origins = {"http://localhost:5173", "https://stock-engine-frontend-1-vvn3.vercel.app"})
+@CrossOrigin(origins = {"https://stock-engine-frontend-1.vercel.app", "https://stock-engine-frontend-1-vvn3.vercel.app"})
 public class StockController {
 
     private final StockPriceService stockPriceService;
